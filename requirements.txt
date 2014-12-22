@@ -1,3 +1,6 @@
-Flask
-git+https://github.com/google/transitfeed.git@master#egg=transitfeed
-
+Flask==0.10.1
+Flask-BasicAuth==0.2.0
+gunicorn==19.1.1
+git+https://github.com/google/transitfeed.git@1.2.13#egg=transitfeed
+wget==2.2
+wsgiref==0.1.2
