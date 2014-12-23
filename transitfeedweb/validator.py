@@ -17,14 +17,13 @@ class DictObj(object):
         return self
 
 class GTFSValidator(object):
-    def __init__(self, url): 
-        self.url = url
+    def __init__(self): 
         self.feedfile = None
     
-    def download(self):
-        assert self.urlExists(self.url)
+    def download(self, url):
+        assert self.urlExists(url)
         tempfile = os.path.join('/tmp', '%s.zip' % str(uuid.uuid4()))
-        self.feedfile = download(self.url, out=tempfile)
+        self.feedfile = download(url, out=tempfile)
         return self.feedfile
     
     def validate(self, feed, **options):
@@ -63,6 +62,26 @@ class GTFSValidator(object):
         import urllib2
         ret = urllib2.urlopen(url)
         return ret.code == 200
+    
+    def get_feed_file(self, feedurl, local_folder=None, local_prefix='upload:'):
+        feed = None
+        error = None
+        # download?
+        if feedurl and 'http' in feedurl:
+            try:
+                feed = self.download(feedurl)
+            except Exception as e:
+                error = e  
+                # print error, traceback.print_exc()
+        # or local file:
+        elif local_prefix in feedurl:
+            feed = feedurl.replace(local_prefix, local_folder)
+            print feed
+            if not os.path.exists(feed):
+                error = 'Error uploading file %s' % feedurl
+        else:
+            error = 'This URL does not exist.'
+        return feed, error
         
 
              
