@@ -1,11 +1,4 @@
 # source: http://stackoverflow.com/a/19352848/890242
-from Cookie import BaseCookie, SimpleCookie
-import httplib
-import urllib2
-import urlparse
-
-import requests
-from werkzeug.wsgi import responder
 
 def download(url, out=None):
     """
