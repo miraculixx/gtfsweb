@@ -37,3 +37,10 @@ Limitations
 * feed is downloaded and validated within the same web request - no async processing. Large feeds will crash the server or timeout
 * the download is using the `wget` command -- if someone knows of a Python-only download that actually works (including cookies and session processing), please open a PR. Will be happy to integrate
 * single-user authentication
+
+License
+-------
+
+The transitfeedweb package is released under the MIT license. Note that for the
+actual feed validation, it installs and uses the transitfeed package released
+by Google Inc. under the Apache License. 
