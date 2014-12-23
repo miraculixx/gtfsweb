@@ -34,7 +34,7 @@ def index():
         
         if not error:
             results = validator.validate(feed)
-        validator.cleanup() 
+        validator.cleanup(feed) 
     return render_template('index.html', feedurl=feedurl or '', results=results, error=error)
 
 

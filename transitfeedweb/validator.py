@@ -39,9 +39,9 @@ class GTFSValidator(object):
         results = ' '.join(results) if isinstance(results, list) else results
         return results.decode('utf-8', 'ignore')
     
-    def cleanup(self):
-        if self.feedfile:
-            os.remove(self.feedfile)
+    def cleanup(self, feedfile):
+        if self.feedfile or feedfile:
+            os.remove(self.feedfile or feedfile)
     
     def defaultOptions(self):
         options = {
