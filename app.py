@@ -1,4 +1,5 @@
 import os
+import traceback
 
 from flask import Flask
 from flask.globals import request
@@ -6,6 +7,7 @@ from flask.templating import render_template
 from flask_basicauth import BasicAuth
 
 from transitfeedweb.validator import GTFSValidator
+
 
 app = Flask(__name__)
 
@@ -25,7 +27,8 @@ def index():
         try:
             feed = validator.download()
         except Exception as e:
-            error = e
+            error = e  
+            print error, traceback.print_exc()
         else:
             results = validator.validate(feed)
         validator.cleanup()

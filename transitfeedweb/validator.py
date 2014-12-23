@@ -1,9 +1,11 @@
 import os
 import tempfile
+import uuid
 
-import wget
+from transitfeedweb.download import download
 
 from .feedvalidator import RunValidationOutputToFile
+
 
 class DictObj(object):
     def __init__(self, d):
@@ -18,7 +20,8 @@ class GTFSValidator(object):
     
     def download(self):
         assert self.urlExists(self.url)
-        self.feedfile = wget.download(self.url, out='/tmp')
+        tempfile = os.path.join('/tmp', '%s.zip' % str(uuid.uuid4()))
+        self.feedfile = download(self.url, out=tempfile)
         return self.feedfile
     
     def validate(self, feed, options=None):
@@ -31,7 +34,8 @@ class GTFSValidator(object):
             output_file.close()
         except IOError, e:
             raise
-        return ' '.join(results) if isinstance(results, list) else results
+        results = ' '.join(results) if isinstance(results, list) else results
+        return results.decode('utf-8', 'ignore')
     
     def cleanup(self):
         if self.feedfile:
