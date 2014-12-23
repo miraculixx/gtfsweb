@@ -12,6 +12,9 @@ class DictObj(object):
         self._data = d
     def __getattr__(self, attr):
         return self._data.get(attr)
+    def update(self, other):
+        self._data.update(other)
+        return self
 
 class GTFSValidator(object):
     def __init__(self, url): 
@@ -24,8 +27,8 @@ class GTFSValidator(object):
         self.feedfile = download(self.url, out=tempfile)
         return self.feedfile
     
-    def validate(self, feed, options=None):
-        options = options or self.defaultOptions()
+    def validate(self, feed, **options):
+        options = self.defaultOptions().update(options)
         try:
             output_file = tempfile.NamedTemporaryFile('w+')
             RunValidationOutputToFile(feed, options, output_file)
