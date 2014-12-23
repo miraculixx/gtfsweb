@@ -11,8 +11,8 @@ from transitfeedweb.validator import GTFSValidator
 
 app = Flask(__name__)
 
-app.config['BASIC_AUTH_USERNAME'] = 'bbookers'
-app.config['BASIC_AUTH_PASSWORD'] = 'Mascen19'
+app.config['BASIC_AUTH_USERNAME'] = os.environ.get('GTFSWEB_USERNAME', 'user')
+app.config['BASIC_AUTH_PASSWORD'] = os.environ.get('GTFSWEB_PASSWORD', 'useruser')
 
 basic_auth = BasicAuth(app)
 
