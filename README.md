@@ -26,6 +26,11 @@ export GTFSWEB_USERNAME=<username>
 export GTFSWEB_PASSWORD=<password>
 ```
 
+Sample
+------
+
+![](docs/screenshot.png?raw=true)
+
 Limitations
 -----------
 
